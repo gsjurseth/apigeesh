@@ -17,10 +17,14 @@ function doHelp() {
 
 dir=.
 
+baseuri=https://api.enterprise.apigee.com/v1/o
 ### Get the options bit done
-while getopts "o:u:d:h" arg; do
+while getopts "b:o:u:d:h" arg; do
   options_found=1
   case $arg in
+    b)
+      baseuri=$OPTARG
+    ;;
     o)
       org=$OPTARG
     ;;
@@ -50,6 +54,8 @@ stty -echo
 read pass
 stty echo
 
+APIGEE_BASE=${baseuri}
+
 function listEnvs() {
   $CURL -s -H "Accept: application/json" -u ${username}:${pass} "${APIGEE_BASE}/${org}/e" | tr -d '[]",''"'
 }
@@ -76,7 +82,6 @@ function listTS() {
   $CURL -s -H "Accept: application/json" -u ${username}:${pass} "${APIGEE_BASE}/${org}/e/$env/targetservers" | tr -d '[]",''"'
 }
 
-APIGEE_BASE=https://api.enterprise.apigee.com/v1/o
 CURL=$(which curl)
 #CURL_OPTS=-q -H "Accept: application/json" -u ${username}:${pass}
 
