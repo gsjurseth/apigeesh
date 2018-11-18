@@ -12,7 +12,7 @@ Today this will export the following:
 ## Execution
 You simply run the script like so:
 ```sh
-./apigee.sh -u user@foo.com -o myorg -d foo
+./apigee.sh -u user@host.com -o someOrg -c <import|export> [-d /path/to/dir] [-b http://url.of.mgmserver]
 ```
 
-This will export everything in to a directory structure named: `foo`. The script will prompt you for user password.
+Use the export command to export and the import for importing
